@@ -55,7 +55,12 @@ class AutoUpdater {
           listener.onUpdaterCheckingForUpdate(appcast);
           break;
         case 'update-available':
-          listener.onUpdaterUpdateAvailable(appcastItem);
+          // Check if this is a mandatory update
+          if (appcastItem?.isMandatory == true) {
+            listener.onUpdaterMandatoryUpdateAvailable(appcastItem);
+          } else {
+            listener.onUpdaterUpdateAvailable(appcastItem);
+          }
           break;
         case 'update-not-available':
           listener.onUpdaterUpdateNotAvailable(updaterError);
@@ -65,6 +70,12 @@ class AutoUpdater {
           break;
         case 'before-quit-for-update':
           listener.onUpdaterBeforeQuitForUpdate(appcastItem);
+          break;
+        case 'update-installation-started':
+          listener.onUpdaterUpdateInstallationStarted(appcastItem);
+          break;
+        case 'update-installation-completed':
+          listener.onUpdaterUpdateInstallationCompleted(appcastItem);
           break;
       }
     }
@@ -95,6 +106,21 @@ class AutoUpdater {
   /// Sets the auto update check interval, default 86400, minimum 3600, 0 to disable update
   Future<void> setScheduledCheckInterval(int interval) {
     return _platform.setScheduledCheckInterval(interval);
+  }
+
+  /// Forces an immediate update installation without user confirmation
+  Future<void> installUpdateAndRestart() {
+    return _platform.installUpdateAndRestart();
+  }
+
+  /// Sets whether updates should be forced (mandatory)
+  Future<void> setMandatoryUpdates(bool mandatory) {
+    return _platform.setMandatoryUpdates(mandatory);
+  }
+
+  /// Downloads an update without installing it
+  Future<void> downloadUpdate() {
+    return _platform.downloadUpdate();
   }
 }
 

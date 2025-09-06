@@ -39,6 +39,8 @@ class AppcastItem {
     this.maximumSystemVersion,
     this.maximumOperatingSystemVersionIsOK,
     this.channel,
+    this.isMandatory,
+    this.mandatoryMessage,
   });
 
   factory AppcastItem.fromJson(Map<String, dynamic> json) =>
@@ -60,6 +62,12 @@ class AppcastItem {
   final String? maximumSystemVersion;
   final bool? maximumOperatingSystemVersionIsOK;
   final String? channel;
+  
+  /// Whether this update is mandatory (forced)
+  final bool? isMandatory;
+  
+  /// Custom message for mandatory updates
+  final String? mandatoryMessage;
 
   Map<String, dynamic> toJson() => _$AppcastItemToJson(this);
 }

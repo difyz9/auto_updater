@@ -1,3 +1,17 @@
+## 1.1.0
+
+* **NEW**: Add support for mandatory (forced) updates
+* **NEW**: Add `installUpdateAndRestart()` method for immediate update installation
+* **NEW**: Add `setMandatoryUpdates(bool)` method to enable/disable mandatory update mode
+* **NEW**: Add `downloadUpdate()` method for background update downloading
+* **NEW**: Add new event callbacks:
+  - `onUpdaterMandatoryUpdateAvailable()` - called when a mandatory update is detected
+  - `onUpdaterUpdateInstallationStarted()` - called when update installation begins
+  - `onUpdaterUpdateInstallationCompleted()` - called when update installation completes
+* **NEW**: Extend `AppcastItem` with `isMandatory` and `mandatoryMessage` fields
+* **IMPROVEMENT**: Enhanced update flow control for better user experience
+* **DOCS**: Add comprehensive mandatory updates usage guide
+
 ## 1.0.0
 
 * First major release.
